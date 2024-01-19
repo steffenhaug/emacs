@@ -58,6 +58,44 @@
 
 (use-package magit
   :ensure t)
+
+(use-package corfu
+  :ensure t
+  :config
+  (setq corfu-cycle t)
+  (setq corfu-auto t)
+  (setq corfu-auto-prefix 2)
+  (setq corfu-auto-delay 0.0)
+  :init
+  (global-corfu-mode))
+
+(use-package undo-tree
+  :ensure t
+  :config
+  (setq undo-tree-auto-save-history nil)
+  (global-undo-tree-mode))
+
+(use-package evil
+  :after undo-tree
+  :ensure t
+  :init
+  (setq evil-disable-insert-state-bindings t)
+  (setq evil-undo-system 'undo-tree)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-w-in-emacs-state t)
+  (setq evil-want-Y-yank-to-eol t)
+  (setq evil-v$-excludes-newline t)
+  (setq evil-split-window-below t)
+  (setq evil-echo-state nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
    
 (use-package tuareg
   :ensure t
@@ -66,18 +104,14 @@
 
 (use-package dune :ensure t)
 
-(defvar oaty/compile-called nil
-  "Flag to track if I have compiled before.")
+;; (keymap-set flymake-mode-map "C-." 'flymake-goto-next-error)
+;; (keymap-set flymake-mode-map "C-," 'flymake-goto-prev-error)
 
-(make-variable-buffer-local 'oaty/compile-called)
+;; Todo: leader key
+;; leader leader switch buffer
+;; leader ; list buffers
 
-(defun oaty/compile ()
-  (interactive)
-  (if oaty/compile-called
-      (recompile)
-    (setq oaty/compile-called t)
-    (if (project-current)
-        (project-compile)
-      (compile))))
+(keymap-global-set "C-c C-," 'mode-line-other-buffer)
+(keymap-global-set "C-c C-;" 'ivy-switch-buffer)
 
-(keymap-global-set "C-c C-c" 'oaty/compile)
+(load (locate-user-emacs-file "modeline.el"))
