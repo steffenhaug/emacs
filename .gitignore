@@ -1,0 +1,6 @@
+auto-save-list
+melpa/*
+elpa/*
+eln-cache/
+etc/
+var/
