@@ -2,7 +2,7 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Keep the directory clean!
+;; Anti-littering measures
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
@@ -10,11 +10,11 @@
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
 (load custom-file)
 
-(progn
-  (load-theme 'modus-operandi t)
-  (custom-set-faces
-   '(mode-line          ((t (:box nil))))
-   '(mode-line-inactive ((t (:box nil))))))
+;; GUI Stuff
+(load-theme 'phoebe t)
+(set-face-attribute
+ 'default nil
+ :height 140)
 
 (use-package ivy
   :ensure t
@@ -25,12 +25,14 @@
 
 (setq-default indent-tabs-mode nil)
 
+;; Auto-refresh buffers after changes on disk.
 (setq global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode 1)
 (setq auto-revert-interval 0.01)
 
 (setq echo-keystrokes 0.01)
 
+;; Resize and scroll pixelwise
 (setq frame-resize-pixelwise t)
 (setq pixel-scroll-precision-interpolate-mice t)
 (pixel-scroll-precision-mode)
@@ -82,6 +84,7 @@
   (setq evil-disable-insert-state-bindings t)
   (setq evil-undo-system 'undo-tree)
   (setq evil-want-keybinding nil)
+  (setq evil-want-integration t)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-w-in-emacs-state t)
   (setq evil-want-Y-yank-to-eol t)
@@ -94,8 +97,12 @@
 (use-package evil-collection
   :after evil
   :ensure t
+  :init
+  (setq evil-collection-want-unimpaired-p nil)
   :config
   (evil-collection-init))
+
+;; OCAML
    
 (use-package tuareg
   :ensure t
@@ -103,6 +110,11 @@
   (keymap-unset tuareg-mode-map "C-c"))
 
 (use-package dune :ensure t)
+
+;; JULIA
+
+(use-package julia-mode
+  :ensure t)
 
 ;; (keymap-set flymake-mode-map "C-." 'flymake-goto-next-error)
 ;; (keymap-set flymake-mode-map "C-," 'flymake-goto-prev-error)

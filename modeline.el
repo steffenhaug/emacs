@@ -46,15 +46,14 @@
        (intern (format "modeline-%s" (symbol-name ,face)))
      (intern (format "modeline-%s-inactive" (symbol-name ,face)))))
 
-
 ;; Library of custom modeline elements
 
 (st/declare-modeline-element-faces 'vi-cursor)
 
 (defconst st/vi-cursor
-  `(:eval
+  '(:eval
     (propertize " %l:%c "
-                'face ,(st/fallback-to-inactive 'vi-cursor)))
+                'face (st/fallback-to-inactive 'vi-cursor)))
   "Mode line construct for displaying the position of the point.")
 
 (dolist (st '(normal insert visual replace motion emacs))
@@ -69,47 +68,43 @@
         (format " %s " (capitalize abbr)))))
 
 (defconst st/vi-state
-  `(:eval (let* ((name (format "vi-state-%s" evil-state))
+  '(:eval (let* ((name (format "vi-state-%s" evil-state))
                  (face (st/fallback-to-inactive (intern-soft name))))
             (propertize (st/format-evil-state)
                         'face face)))
   "Mode line construct for displaying the EVIL Vi state")
 
-;; Mode for managing the custom modeline
+;; https://emacs.stackexchange.com/a/7542
+(defun st/modeline-render (left right)
+  (let* ((available-width (- (window-width) (length left))))
+    (format (format "%%s %%%ds" available-width) left right)))
 
-(defvar st/original-modeline-format nil
-  "Variable to store the original mode-line-format.")
-
-(defvar st/modeline-format
+(defvar st/modeline-left
   '((evil-mode st/vi-state)
-    "%e"
-    " "
+    "%e "
     mode-line-front-space
     mode-line-mule-info
+
     mode-line-client
     mode-line-modified
     mode-line-remote
+
     mode-line-frame-identification
+    mode-line-buffer-identification
+
+
     (vc-mode vc-mode)
-    st/vi-cursor
+    "  "
     mode-line-misc-info
     mode-line-end-spaces)
-  "Customized modeline format.")
+  "Left-hand side of custom modeline.")
 
-(define-minor-mode st-modeline-mode
-  "Toggle My Custom Minor Mode."
-  :init-value nil
-  :global t
-  (if st-modeline-mode
-      (progn
-        (unless st/original-modeline-format
-          (setq st/original-modeline-format mode-line-format))
-        (setq mode-line-format st/modeline-format))
-    ;; Restore the original mode-line-format
-    (setq mode-line-format st/original-modeline-format)))
+(defvar st/modeline-right
+  '((t st/vi-cursor)
+    (t mode-name))
+  "Right-hand side of custom modeline.")
 
-(st-modeline-mode 1)
-(st-modeline-mode 0)
-
-
-mode-line-format
+(setq-default mode-line-format 
+              '((:eval (st/modeline-render
+                        (format-mode-line st/modeline-left)
+                        (format-mode-line st/modeline-right)))))
