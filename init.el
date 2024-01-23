@@ -85,9 +85,9 @@
   (setq evil-split-window-below t)
   (setq evil-echo-state nil)
   :config
+  (evil-mode 1)
   (evil-set-initial-state 'vterm-mode 'emacs)
-  (evil-set-initial-state 'text-mode  'insert) ; Magit commits
-  (evil-mode 1))
+  (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
 (use-package evil-collection
   :after evil
@@ -98,4 +98,5 @@
   (evil-collection-init))
 
 (load (locate-user-emacs-file "modeline.el"))
+(load (locate-user-emacs-file "lsp.el"))
 (load (locate-user-emacs-file "keys.el"))
