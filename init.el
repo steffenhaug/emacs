@@ -64,16 +64,6 @@
 (use-package magit
   :ensure t)
 
-(use-package corfu
-  :ensure t
-  :config
-  (setq corfu-cycle t)
-  (setq corfu-auto t)
-  (setq corfu-auto-prefix 2)
-  (setq corfu-auto-delay 0.0)
-  :init
-  (global-corfu-mode))
-
 (use-package undo-tree
   :ensure t
   :config

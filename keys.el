@@ -1,5 +1,5 @@
 ;; Stop completion when leaving insert mode.
-(keymap-set evil-insert-state-map "ESC"
+(keymap-set evil-insert-state-map "<escape>"
             (lambda () (interactive) (corfu-quit) (evil-normal-state)))
 
 (keymap-unset corfu-map "RET")
