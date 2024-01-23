@@ -85,6 +85,8 @@
   (setq evil-split-window-below t)
   (setq evil-echo-state nil)
   :config
+  (evil-set-initial-state 'vterm-mode 'emacs)
+  (evil-set-initial-state 'text-mode  'insert) ; Magit commits
   (evil-mode 1))
 
 (use-package evil-collection
