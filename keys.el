@@ -15,4 +15,3 @@
 
 ;; Buffer navigation
 (keymap-global-set "C-c C-," 'mode-line-other-buffer)
-(keymap-global-set "C-c C-;" 'ivy-switch-buffer)

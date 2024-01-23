@@ -21,23 +21,15 @@
 
 ;; Custom faces
 
-(defface st/modeline-active
-  '((t :inherit mode-line-active))
-  "Default face for the modeline.")
-
-(defface st/modeline-inactive
-  '((t :inherit mode-line-inactive))
-  "Default face for the modeline in inactive windows.")
-
 (defun st/declare-modeline-element-faces (sym)
   "Define a pair of modeline-* and modeline-*-inactive faces."
   (let* ((state-inactive (intern (format "modeline-%s-inactive" (symbol-name sym))))
          (state          (intern (format "modeline-%s" (symbol-name sym)))))
     (custom-declare-face
-     state '((t :inherit st/modeline-active))
+     state '((t :inherit mode-line-active))
      (format "Face for the %s modeline element." (symbol-name sym)))
     (custom-declare-face
-     state-inactive '((t :inherit st/modeline-inactive))
+     state-inactive '((t :inherit mode-line-inactive))
      (format "Face for the %s modeline element in inactive windows." (symbol-name sym)))))
 
 (defmacro st/fallback-to-inactive (face)
@@ -77,7 +69,10 @@
 ;; https://emacs.stackexchange.com/a/7542
 (defun st/modeline-render (left right)
   (let* ((available-width (- (window-width) (length left))))
-    (format (format "%%s %%%ds" available-width) left right)))
+    (format
+     (format "%%s %%%ds" available-width)
+     left
+     right)))
 
 (defvar st/modeline-left
   '((evil-mode st/vi-state)
@@ -101,6 +96,7 @@
 
 (defvar st/modeline-right
   '((t st/vi-cursor)
+    " "
     (t mode-name))
   "Right-hand side of custom modeline.")
 

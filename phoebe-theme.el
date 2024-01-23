@@ -222,8 +222,7 @@ of this face takes care of that.")
   (custom-theme-set-variables
    'phoebe
    ;; Variables
-   '(window-divider-default-right-width 1)
-   '(org-fontify-quote-and-verse-blocks nil))
+   '(window-divider-default-right-width 1))
   (custom-theme-set-faces
    'phoebe
 
@@ -550,38 +549,18 @@ of this face takes care of that.")
                             :background ,black3
                             :foreground ,fg)))
 
-   ;; Oatys Modeline
-   `(oaty/modeline-vi-state          ((t :inherit mode-line
-                                         :background ,white1)))
-   `(oaty/modeline-vi-state-inactive ((t :inherit oaty/modeline-vi-state
-                                         :background ,black4)))
+   ;; Moodline
+   `(modeline-vi-state-normal   ((t :inherit mode-line-active
+                                    :background ,yellow2)))
+   `(modeline-vi-state-insert   ((t :inherit mode-line-active
+                                    :background ,blue1)))
+   `(modeline-vi-state-visual   ((t :inherit mode-line-active
+                                    :background ,magenta1)))
+   `(modeline-vi-state-replace  ((t :inherit mode-line-active
+                                    :background ,red4)))
+   `(modeline-vi-state-emacs    ((t :inherit mode-line-active
+                                    :background ,purple1)))
 
-   `(oaty/modeline-buffer-id          ((t :inherit mode-line
-                                          :background ,white2)))
-   `(oaty/modeline-buffer-id-inactive ((t :inherit oaty/modeline-buffer-id
-                                          :background ,black2
-                                          :foreground ,fg)))
-
-   `(oaty/modeline-vi-cursor          ((t :inherit mode-line)))
-   `(oaty/modeline-vi-cursor-inactive ((t )))
-
-   `(oaty/modeline-major-mode          ((t :inherit mode-line)))
-   `(oaty/modeline-major-mode-inactive ((t )))
-
-   `(oaty/modeline-vi-normal   ((t :inherit oaty/modeline-vi-state
-                                   :background ,green3)))
-   `(oaty/modeline-vi-insert   ((t :inherit oaty/modeline-vi-state
-                                   :background ,blue1)))
-   `(oaty/modeline-vi-visual   ((t :inherit oaty/modeline-vi-state
-                                   :background ,magenta1)))
-   `(oaty/modeline-vi-replace  ((t :inherit oaty/modeline-vi-state
-                                   :background ,red4)))
-   `(oaty/modeline-vi-emacs    ((t :inherit oaty/modeline-vi-state
-                                   :background ,purple1)))
-
-   `(oaty/modeline-buffer-id-roam          ((t :inherit oaty/modeline-buffer-id
-                                               :background ,yellow3)))
-   `(oaty/modeline-buffer-id-roam-inactive ((t :inherit oaty/modeline-buffer-id-inactive)))
 
    ;; `(mode-line-buffer-id ((t :inherit bold)))
    ;; `(mode-line-emphasis ((t :inherit bold :foreground ,modeline-info)))
@@ -590,11 +569,6 @@ of this face takes care of that.")
    ;;                           :box ,border-mode-line-inactive
    ;;                           :background ,bg-mode-line-inactive
    ;;                           :foreground ,fg-mode-line-inactive)))
-
-
-   ;; Hydra
-   `(hydra-face-red      ((t :foreground ,red4)))
-   `(hydra-face-blue     ((t :foreground ,blue1)))
 
    ;; ANSI Terminal colors
    ;; Bizarrely, vterm ignores the *-bright-* colors, and uses the :background
