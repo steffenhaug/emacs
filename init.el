@@ -1,4 +1,5 @@
 ;; Use MELPA
+(require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
@@ -23,6 +24,7 @@
   (setq ivy-height 8)
   (ivy-mode))
 
+
 (setq-default indent-tabs-mode nil)
 
 ;; Auto-refresh buffers after changes on disk.
@@ -31,6 +33,7 @@
 (setq auto-revert-interval 0.01)
 
 (setq echo-keystrokes 0.01)
+(setq scroll-conservatively 5)
 
 ;; Resize and scroll pixelwise
 (setq frame-resize-pixelwise t)
@@ -102,28 +105,5 @@
   :config
   (evil-collection-init))
 
-;; OCAML
-   
-(use-package tuareg
-  :ensure t
-  :config
-  (keymap-unset tuareg-mode-map "C-c"))
-
-(use-package dune :ensure t)
-
-;; JULIA
-
-(use-package julia-mode
-  :ensure t)
-
-;; (keymap-set flymake-mode-map "C-." 'flymake-goto-next-error)
-;; (keymap-set flymake-mode-map "C-," 'flymake-goto-prev-error)
-
-;; Todo: leader key
-;; leader leader switch buffer
-;; leader ; list buffers
-
-(keymap-global-set "C-c C-," 'mode-line-other-buffer)
-(keymap-global-set "C-c C-;" 'ivy-switch-buffer)
-
 (load (locate-user-emacs-file "modeline.el"))
+(load (locate-user-emacs-file "keys.el"))
