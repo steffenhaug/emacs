@@ -15,3 +15,11 @@
 
 ;; Buffer navigation
 (keymap-global-set "C-c C-," 'mode-line-other-buffer)
+
+;; :x save and kill buffer instead of closing window.
+(defun st/save-kill ()
+  (interactive)
+  (save-buffer)
+  (kill-current-buffer))
+
+(evil-ex-define-cmd "x" 'st/save-kill)

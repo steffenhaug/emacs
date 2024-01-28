@@ -97,6 +97,8 @@
   :config
   (evil-collection-init))
 
-(load (locate-user-emacs-file "modeline.el"))
+(use-package moodline
+  :load-path "~/Code/moodline")
+
 (load (locate-user-emacs-file "lsp.el"))
 (load (locate-user-emacs-file "keys.el"))

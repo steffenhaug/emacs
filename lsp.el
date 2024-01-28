@@ -45,4 +45,3 @@
 
 (use-package julia-mode
   :ensure t)
-

@@ -4,3 +4,7 @@ elpa/*
 eln-cache/
 etc/
 var/
+tree-sitter/
+
+# My own package symlinks
+moodline
