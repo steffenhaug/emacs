@@ -561,6 +561,14 @@ of this face takes care of that.")
    `(modeline-vi-state-emacs    ((t :inherit mode-line-active
                                     :background ,purple1)))
 
+   ;; Tabs
+   ;; tab-bar                   
+   ;; tab-bar-tab               
+   ;; tab-bar-tab-group-current 
+   ;; tab-bar-tab-group-inactive
+   ;; tab-bar-tab-inactive      
+   ;; tab-bar-tab-ungrouped     
+
 
    ;; `(mode-line-buffer-id ((t :inherit bold)))
    ;; `(mode-line-emphasis ((t :inherit bold :foreground ,modeline-info)))
