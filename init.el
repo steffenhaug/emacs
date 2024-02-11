@@ -15,7 +15,8 @@
 (load-theme 'phoebe t)
 (set-face-attribute
  'default nil
- :height 140)
+ :height 140
+ :font "JuliaMono Freeze")
 
 (use-package ivy
   :ensure t
@@ -33,7 +34,8 @@
 (setq auto-revert-interval 0.01)
 
 (setq echo-keystrokes 0.01)
-(setq scroll-conservatively 5)
+(setq scroll-conservatively 1000)
+(setq scroll-margin 5)
 
 ;; Resize and scroll pixelwise
 (setq frame-resize-pixelwise t)
@@ -102,3 +104,6 @@
 
 (load (locate-user-emacs-file "lsp.el"))
 (load (locate-user-emacs-file "keys.el"))
+(load (locate-user-emacs-file "org.el"))
+(load (locate-user-emacs-file "fixes.el"))
+

@@ -45,3 +45,17 @@
 
 (use-package julia-mode
   :ensure t)
+
+(use-package julia-vterm
+  :ensure t
+  :after julia-mode vterm
+  :init
+  (setenv "JULIA_NUM_THREADS" "auto")
+  :hook (julia-mode-hook . julia-vterm-mode))
+
+
+(use-package eglot-jl
+  :ensure t
+  :after eglot julia-mode
+  :config
+  (eglot-jl-init))
