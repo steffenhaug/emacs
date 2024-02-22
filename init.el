@@ -22,8 +22,28 @@
   :ensure t
   :config
   (setq ivy-count-format "")
-  (setq ivy-height 8)
+  (setq ivy-height 16)
   (ivy-mode))
+
+(use-package ivy-posframe
+  :ensure t
+  :after ivy
+  :config
+  (setq ivy-posframe-parameters
+        '((left-fringe  . 4)
+          (right-fringe . 4)))
+  (ivy-posframe-mode))
+
+(use-package counsel
+  :ensure t
+  :after ivy
+  :config
+  (counsel-mode))
+
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
 
 
 (setq-default indent-tabs-mode nil)
@@ -99,11 +119,10 @@
   :config
   (evil-collection-init))
 
-(use-package moodline
-  :load-path "~/Code/moodline")
-
 (load (locate-user-emacs-file "lsp.el"))
 (load (locate-user-emacs-file "keys.el"))
 (load (locate-user-emacs-file "org.el"))
 (load (locate-user-emacs-file "fixes.el"))
 
+(use-package moodline
+  :load-path "~/Code/moodline")
