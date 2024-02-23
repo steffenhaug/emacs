@@ -18,33 +18,29 @@
  :height 140
  :font "JuliaMono Freeze")
 
-(use-package ivy
+(use-package vertico
   :ensure t
   :config
-  (setq ivy-count-format "")
-  (setq ivy-height 16)
-  (ivy-mode))
-
-(use-package ivy-posframe
-  :ensure t
-  :after ivy
-  :config
-  (setq ivy-posframe-parameters
-        '((left-fringe  . 4)
-          (right-fringe . 4)))
-  (ivy-posframe-mode))
-
-(use-package counsel
-  :ensure t
-  :after ivy
-  :config
-  (counsel-mode))
+  (setq vertico-cycle t)
+  (setq vertico-resize nil)
+  (savehist-mode 1)
+  (recentf-mode 1)
+  (vertico-mode 1))
 
 (use-package marginalia
   :ensure t
   :init
-  (marginalia-mode))
+  (marginalia-mode 1))
 
+(use-package orderless
+  :ensure t
+  :config
+  (setq completion-styles '(orderless basic)))
+
+(use-package consult
+  :ensure t
+  :config
+  ())
 
 (setq-default indent-tabs-mode nil)
 
